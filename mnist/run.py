@@ -25,9 +25,9 @@ def forward_propagation(X, Y, k='mse'):
         y_p = np.exp(h2) / sum(np.exp(h2))
 
         if k == 'mse':
-            l.append(mse(y - y_p))
+            l.append(mse(y, y_p))
         elif k == 'cross_entropy':
-            l.append(cross_entropy(y - y_p))
+            l.append(cross_entropy(y, y_p))
 
     return l
 
