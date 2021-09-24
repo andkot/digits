@@ -32,6 +32,7 @@ def forward_propagation(X, Y, k='mse'):
     return l
 
 
+
 def mse(y, y_p):
     return np.mean((y - y_p) ** 2)
 
@@ -41,15 +42,16 @@ def cross_entropy(y, y_p):
 
 
 if __name__ == '__main__':
-    mndata = MNIST('../python-mnist/data')
-    images, labels = mndata.load_training()
-
-    X_all = np.array(images) / 255
-    Y_all = np.zeros((len(labels), 11))
-    Y_all[range(len(Y_all)), np.array(labels)] = 1
-
-    X_train, X_valid, X_test = np.split(X_all, (np.array([0.7, 0.9])*X_all.shape[0]).astype('int32'))
-    Y_train, Y_valid, Y_test = np.split(Y_all, (np.array([0.7, 0.9])*Y_all.shape[0]).astype('int32'))
-
-    loss = forward_propagation(X_train, Y_train)
-    [print(l) for l in loss]
+    # mndata = MNIST('../python-mnist/data')
+    # images, labels = mndata.load_training()
+    #
+    # X_all = np.array(images) / 255
+    # Y_all = np.zeros((len(labels), 11))
+    # Y_all[range(len(Y_all)), np.array(labels)] = 1
+    #
+    # X_train, X_valid, X_test = np.split(X_all, (np.array([0.7, 0.9])*X_all.shape[0]).astype('int32'))
+    # Y_train, Y_valid, Y_test = np.split(Y_all, (np.array([0.7, 0.9])*Y_all.shape[0]).astype('int32'))
+    #
+    # loss = forward_propagation(X_train, Y_train)
+    # [print(l) for l in loss]
+    print(globals())
