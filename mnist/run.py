@@ -3,13 +3,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from mnist import MNIST
-
-
-# number of neurons on the first layer
 from sklearn.utils import shuffle
 
+# number of neurons on the first layer
 nn1 = 128
+# size output vector
 nno = 11
+# size input vector
 nni = 784
 n_epoch = 10
 h = 0.01
