@@ -56,7 +56,7 @@ if __name__ == '__main__':
     W2 = np.random.randn(nno, nn1)
     b2 = np.random.randn(nno)
 
-    for i in range(10):
+    for i in range(n_epoch):
         X, Y = shuffle(X_train, Y_train)
         X_batches = np.split(X, n_batches)
         Y_batches = np.split(Y, n_batches)
