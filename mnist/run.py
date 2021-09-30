@@ -66,12 +66,16 @@ if __name__ == '__main__':
 
         for X, Y in zip(X_batches, Y_batches):
             # массивы производных
-            dW1 = np.zeros((NN1, NNI))
+            dW1 = np.zeros((NN1, NNI)) #<- add additional axis bath_size
             db1 = np.zeros(NN1)
             dW2 = np.zeros((NN0, NN1))
             db2 = np.zeros(NN0)
 
             # счиатю производные для каждой картинки в батче и добовляю их к массивам произвдодных
+            
+            # !!!!!
+            h1, z1, h2, y_p = forward_propagation(x, W1, b1, W2, b2)
+            db2 = db2 + (y_p - y) / NN0
             for x, y in zip(X, Y):
                 h1, z1, h2, y_p = forward_propagation(x, W1, b1, W2, b2)
                 db2 = db2 + (y_p - y) / NN0
