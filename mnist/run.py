@@ -71,12 +71,10 @@ if __name__ == '__main__':
             # счиатю производные для каждой картинки в батче и добовляю их к массивам произвдодных
             for x, y in zip(X, Y):
                 h1, z1, h2, y_p = forward_propagation(x, W1, b1, W2, b2)
-                for i, j in zip(np.arange(nn1), np.arange(nni)):
-                    dW1[i, j] =dW1[i, j] + int(h1[i] > 0) * x[j] * sum([(y_p[k] - y[k]) * W1[k, i] for k in range(nno)]) / nno
-                    db1[i] = db1[i] + int(h1[i] > 0) * sum([(y_p[k] - y[k]) * W1[k, i] for k in range(nno)]) / nno
-                for k, i in zip(np.arange(nno), np.arange(nn1)):
-                    dW2[k, i] = dW2[k, i] + (y_p[k] - y[k]) * z1[i] / nno
-                    db2[k] = db2[k] + (y_p[k] - y[k]) / nno
+                db2 = db2 + (y_p - y) / nno
+                dW2 = dW2 + (y_p - y).reshape((-1, 1)) @ z1.reshape((1, -1)) / nno
+                db1 = db1 + (h1 > 0) * ((y_p - y) @ W2) / nno
+                dW1 = dW1 + ((h1 > 0) * ((y_p - y) @ W2)).reshape(-1, 1) @ x.reshape(1, -1) / nno
 
             # считаю среднюю производную по всем картинкам в батче
             dW1 = dW1 / X.shape[0]
@@ -91,5 +89,8 @@ if __name__ == '__main__':
             b2 = b2 - h*db2
 
 
-
+    # тут я проверил для 2 картинки верно ли выходит - выходит не верно
+    h1, z1, h2, y_p = forward_propagation(X_train[1], W1, b1, W2, b2)
+    print(np.round(y_p, 1))
+    print(Y_train[1])
 
